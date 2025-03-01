@@ -10,8 +10,8 @@ public class UserController {
 
     @GetMapping("/user/home")
     public String userHome(Model model, Principal principal) {
-        String username = principal.getName(); // Lấy tên user đang đăng nhập
+        String username = principal.getName();
         model.addAttribute("username", username);
-        return "user-home"; // Hiển thị trang user-home.html
+        return "user-home";
     }
 }
