@@ -7,7 +7,10 @@ import org.springframework.security.core.Authentication;
 
 @Controller
 public class AdminController {
-
+    /*--------------------------------------
+    * Admin Home
+    /*--------------------------------------
+    */
     @GetMapping("/admin")
     public String adminPage(Authentication authentication, Model model) {
         model.addAttribute("username", authentication.getName());

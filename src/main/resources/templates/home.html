@@ -19,50 +19,51 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            width: 350px;
+            width: 400px;
             text-align: center;
-            animation: fadeIn 1s ease-in-out, floating 3s infinite ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes floating {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-            100% { transform: translateY(0); }
         }
         h2 {
-            margin-bottom: 20px;
             color: #6a0dad;
+            margin-bottom: 20px;
         }
-        p {
-            color: #333;
-            font-size: 16px;
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
         }
-        .logout-button {
+        .logout-button, .delete-button, .edit-button {
             background: #6a0dad;
             color: white;
             border: none;
             padding: 10px;
-            width: 100%;
             border-radius: 5px;
             cursor: pointer;
-            transition: background 0.3s;
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            width: 48%;
         }
-        .logout-button:hover {
+        .logout-button:hover, .delete-button:hover, .edit-button:hover {
             background: #4b0082;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Chào mừng, <span th:text="${username}"></span>!</h2>
-        <p>Đây là trang chủ của bạn.</p>
+        <h2><span th:text="${user.email}"></span></h2>
+        <div class="action-buttons">
+            <a th:href="@{/home/edit}" class="edit-button">Sửa</a>
+            <a href="#" class="delete-button" onclick="confirmDelete(event, '/home/delete')">Xóa</a>
+        </div>
+        <br>
         <a href="/logout" class="logout-button">Đăng xuất</a>
     </div>
 </body>
-</html>
+</html> 
+<script>
+    function confirmDelete(event, deleteUrl) {
+        event.preventDefault();
+        if (confirm("Bạn có chắc chắn muốn xóa tài khoản không?")) {
+            window.location.href = deleteUrl; 
+        }
+    }
+</script>

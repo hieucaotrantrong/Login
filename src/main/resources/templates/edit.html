@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa tài khoản</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Chỉnh sửa tài khoản</h2>
+        <form th:action="@{/home/update}" th:object="${user}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required />
+
+            <label>Mật khẩu mới:</label>
+            <input type="password" th:field="*{password}" required />
+
+            <button type="submit">Cập nhật</button>
+        </form>
+        <a href="/home" class="back-link">Quay lại</a>
+    </div>
+
+</body>
+</html>

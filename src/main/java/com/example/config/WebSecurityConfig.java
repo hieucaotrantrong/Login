@@ -24,6 +24,11 @@ public class WebSecurityConfig {
         return new UserDetailsServiceImpl();
     }
 
+    /*----------------------------------------------------
+    Manage authentication with DaoAuthenticationProvider
+    using UserDetailsService and PasswordEncoding.
+    /*----------------------------------------------------
+    */
     @Bean
     public AuthenticationManager authenticationManager(
             UserDetailsService userDetailsService,
@@ -35,17 +40,26 @@ public class WebSecurityConfig {
         return new ProviderManager(authenticationProvider);
     }
 
+    /*--------------------------------------
+    * Admin Home
+    /*--------------------------------------
+    */
     @Bean
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /*--------------------------------------
+    * Admin Home
+    /*--------------------------------------
+    */
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register", "/login", "/h2-console/**").permitAll()
+                        .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
