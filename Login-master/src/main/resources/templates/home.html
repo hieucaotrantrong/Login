@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a0dad, #b066cc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #6a0dad;
+            margin-bottom: 20px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .logout-button, .delete-button, .edit-button {
+            background: #6a0dad;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            width: 48%;
+        }
+        .logout-button:hover, .delete-button:hover, .edit-button:hover {
+            background: #4b0082;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2><span th:text="${user.email}"></span></h2>
+        <div class="action-buttons">
+            <a th:href="@{/home/edit}" class="edit-button">Sửa</a>
+            <a href="#" class="delete-button" onclick="confirmDelete(event, '/home/delete')">Xóa</a>
+        </div>
+        <br>
+        <a href="/logout" class="logout-button">Đăng xuất</a>
+    </div>
+</body>
+</html> 
+<script>
+    function confirmDelete(event, deleteUrl) {
+        event.preventDefault();
+        if (confirm("Bạn có chắc chắn muốn xóa tài khoản không?")) {
+            window.location.href = deleteUrl; 
+        }
+    }
+</script>
